@@ -1,2 +1,2 @@
-#  Covid-19 Tracker Application
+#  Covid-19 Tracker Android Application
 
