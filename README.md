@@ -1,3 +1,2 @@
-# Android Application - Covid-19
+#  Covid-19 Tracker Application
 
-I am trying to learn merge request and other git stuff.
