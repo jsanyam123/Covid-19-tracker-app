@@ -56,7 +56,7 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun handleChipRequest(checkedId:Int){
         val checkedChipId = binding.chipGroup.findViewById<Chip>(checkedId)
         when(checkedChipId!!.text.toString()) {
-            "Total" -> {
+            "Confirmed" -> {
                 if(binding.chip1Img.visibility == View.GONE)
                 {
                     binding.chip1Img.visibility = View.VISIBLE

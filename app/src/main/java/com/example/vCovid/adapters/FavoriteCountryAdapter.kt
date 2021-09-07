@@ -23,10 +23,8 @@ class FavoriteCountryAdapter: RecyclerView.Adapter<FavoriteCountryAdapter.MyView
         fun bind(favouriteCountryModel: FavouriteCountryModel) {
             val favCountry = stringToCountry(favouriteCountryModel.details)
             binding.favoritesCountry = favCountry
-
             var url = "https://www.countryflags.io/"+favCountry.countryCode+"/flat/64.png"
             NetworkHandler.FetchFlag(binding.imageViewFlagFav,url).execute()
-
             binding.executePendingBindings()
         }
 

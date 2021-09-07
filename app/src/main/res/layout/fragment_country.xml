@@ -34,26 +34,28 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Sort:"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/countriesRecyclerView"
             app:layout_constraintEnd_toStartOf="@+id/chipGroup"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="314dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/countriesRecyclerView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent"
             app:singleLine="true"
             app:singleSelection="true">
@@ -64,11 +66,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Total"
+                android:text="Confirmed"
                 android:textSize="12sp"
-                app:chipStrokeColor="@color/colorPrimary"
                 android:visibility="visible"
-                app:chipBackgroundColor="@color/white" />
+                app:chipBackgroundColor="@color/white"
+                app:chipStrokeColor="@color/colorPrimary" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_2"
@@ -76,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-                android:text="Total"
+                android:text="Confirmed"
                 android:textSize="12sp"
                 android:visibility="gone"
                 app:chipBackgroundColor="@color/white" />
@@ -84,19 +86,16 @@
             <ImageView
                 android:id="@+id/chip1Img"
                 android:layout_width="24dp"
-                android:layout_marginEnd="10dp"
                 android:layout_height="50dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
                 android:visibility="visible"
-                />
+                app:srcCompat="@drawable/ic_baseline_arrow_downward_24" />
 
             <ImageView
                 android:id="@+id/chip2Img"
                 android:layout_width="24dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_arrow_upward"
                 android:visibility="gone"
+                app:srcCompat="@drawable/ic_arrow_upward"
 
                 />
 
@@ -127,20 +126,18 @@
                 android:id="@+id/chip3Img"
                 android:layout_width="24dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
                 android:visibility="visible"
-                />
+                app:srcCompat="@drawable/ic_baseline_arrow_downward_24" />
 
             <ImageView
                 android:id="@+id/chip4Img"
                 android:layout_width="24dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_arrow_upward"
                 android:visibility="gone"
+                app:srcCompat="@drawable/ic_arrow_upward"
 
                 />
+
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_5"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -151,7 +148,6 @@
                 android:textSize="12sp"
                 android:visibility="visible"
                 app:chipBackgroundColor="@color/white" />
-
 
 
             <com.google.android.material.chip.Chip
@@ -169,19 +165,15 @@
                 android:id="@+id/chip5Img"
                 android:layout_width="24dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
                 android:visibility="visible"
-                />
+                app:srcCompat="@drawable/ic_baseline_arrow_downward_24" />
 
             <ImageView
                 android:id="@+id/chip6Img"
                 android:layout_width="24dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_arrow_upward"
                 android:visibility="gone"
-                />
+                app:srcCompat="@drawable/ic_arrow_upward" />
 
 
         </com.google.android.material.chip.ChipGroup>

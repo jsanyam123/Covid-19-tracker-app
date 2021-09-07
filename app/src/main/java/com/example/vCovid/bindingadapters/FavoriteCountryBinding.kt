@@ -9,12 +9,9 @@ import com.example.vCovid.models.FavouriteCountryModel
 import com.example.vCovid.adapters.FavoriteCountryAdapter
 import com.example.vCovid.util.NetworkResult
 
-
 // To use binding adapters for favourite country layout file 
 class FavoriteCountryBinding {
-
     companion object {
-        
         @BindingAdapter("setData", "setFavcountries", requireAll = false)
         @JvmStatic
         fun setDataAndViewVisibility(
@@ -22,7 +19,6 @@ class FavoriteCountryBinding {
             mAdapter: FavoriteCountryAdapter?,
             favCountries : NetworkResult<List<FavouriteCountryModel>>
         ) {
-            
             var favCountriesList = favCountries.data
             if (favCountriesList.isNullOrEmpty()) {
                 when (view) {
@@ -51,7 +47,6 @@ class FavoriteCountryBinding {
                 }
             }
         }
-
     }
 
 }

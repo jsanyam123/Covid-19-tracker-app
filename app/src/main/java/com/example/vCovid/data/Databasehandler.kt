@@ -39,18 +39,13 @@ class Databasehandler @Inject constructor(@ApplicationContext context: Context) 
 
     fun addFavouriteCountry(favouriteCountry: FavouriteCountryModel): Long {
         val db = this.writableDatabase
-
         val contentValues = ContentValues()
         contentValues.put(KEY_NAME, favouriteCountry.name)
         contentValues.put(KEY_DETAILS, favouriteCountry.details)
-
         val success = db.insert(TABLE_FAVOURITES, null, contentValues)
-
-//        db.close() // Closing database connection
+        db.close() // Closing database connection
         return success
     }
-
-
 
     fun fetchFavCountries(): ArrayList<FavouriteCountryModel> {
         val favouriteCountryList: ArrayList<FavouriteCountryModel> = ArrayList<FavouriteCountryModel>()
@@ -59,59 +54,31 @@ class Databasehandler @Inject constructor(@ApplicationContext context: Context) 
         var cursor: Cursor? = null
         try {
             cursor = db.rawQuery(selectQuery, null)
-
         } catch (e: SQLiteException) {
             db.execSQL(selectQuery)
             return ArrayList()
         }
-
         var id: Int
         var name: String
         var details: String
-
         if (cursor.moveToFirst()) {
             do {
                 id = cursor.getInt(cursor.getColumnIndex(KEY_ID))
                 name = cursor.getString(cursor.getColumnIndex(KEY_NAME))
                 details = cursor.getString(cursor.getColumnIndex(KEY_DETAILS))
-
                 val emp = FavouriteCountryModel(id = id, name = name, details = details)
                 favouriteCountryList.add(emp)
-
             } while (cursor.moveToNext())
         }
         return favouriteCountryList
     }
 
-    /**
-     * Function to update record
-     */
-
-//    fun updateEmployee(emp: EmpModelClass): Int {
-//        val db = this.writableDatabase
-//        val contentValues = ContentValues()
-//        contentValues.put(KEY_NAME, emp.name) // EmpModelClass Name
-//        contentValues.put(KEY_EMAIL, emp.email) // EmpModelClass Email
-//
-//        // Updating Row
-//        val success = db.update(TABLE_CONTACTS, contentValues, KEY_ID + "=" + emp.id, null)
-//        //2nd argument is String containing nullColumnHack
-//
-//        db.close() // Closing database connection
-//        return success
-//    }
-
-    /**
-     * Function to delete record
-     */
     fun deleteFavouriteCountry(favouriteCountryId: Int): Int {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(KEY_ID, favouriteCountryId) // EmpModelClass id
-        // Deleting Row
+        contentValues.put(KEY_ID, favouriteCountryId)
         val success = db.delete(TABLE_FAVOURITES, "$KEY_ID=$favouriteCountryId", null)
-        //2nd argument is String containing nullColumnHack
-//        db.close() // Closing database connection
+        db.close() // Closing database connection
         return success
     }
 

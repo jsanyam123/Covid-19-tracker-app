@@ -4,17 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vCovid.data.NetworkHandler
-import com.example.vCovid.databinding.CountryRowLayoutBinding
 import com.example.vCovid.databinding.StatesRowLayoutBinding
 import com.example.vCovid.models.statesData.Regional
-import com.example.vCovid.models.summary.Country
 import com.example.vCovid.util.CountryDiffUtil
 
 class StatesAdapter : RecyclerView.Adapter<StatesAdapter.MyViewHolder>() {
-
     private var states = emptyList<Regional>()
-
     class MyViewHolder(private val binding: StatesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -41,7 +36,6 @@ class StatesAdapter : RecyclerView.Adapter<StatesAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentState = states[position]
-
         holder.bind(currentState)
     }
 
