@@ -13,7 +13,6 @@ class RemoteDataSource @Inject constructor(
     private val indianStatesAPI: IndianStatesAPI
 ) {
 
-
     suspend fun getSummary() : Response<SummaryData>{
         return covidApi.getSummary()
     }

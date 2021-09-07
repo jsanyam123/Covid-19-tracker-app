@@ -1,6 +1,5 @@
 package com.example.vCovid.models.statesData
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Regional(

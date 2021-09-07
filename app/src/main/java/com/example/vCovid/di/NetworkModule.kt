@@ -47,7 +47,6 @@ object NetworkModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     @Retrofit2
@@ -73,14 +72,11 @@ object NetworkModule {
     fun provideFlagService(@Retrofit2 retrofit: Retrofit): IndianStatesAPI {
         return retrofit.create(IndianStatesAPI::class.java)
     }
-
 }
-
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class Retrofit1
-
 
 @Qualifier
 @Retention(AnnotationRetention.BINARY)

@@ -1,7 +1,5 @@
 package com.example.vCovid.models.statesData
 
-
-import com.example.vCovid.models.statesData.Data
 import com.google.gson.annotations.SerializedName
 
 data class StatesIndia(

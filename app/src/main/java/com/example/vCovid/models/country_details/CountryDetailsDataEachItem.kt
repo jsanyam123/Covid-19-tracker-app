@@ -1,6 +1,5 @@
 package com.example.vCovid.models.country_details
 
-
 import com.google.gson.annotations.SerializedName
 
 data class CountryDetailsDataEachItem(
