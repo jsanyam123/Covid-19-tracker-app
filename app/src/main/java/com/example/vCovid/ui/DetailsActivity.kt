@@ -47,15 +47,8 @@ class DetailsActivity : AppCompatActivity() {
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         getDataForThisCountry(args.result.country)
-
         getStatesDataforIndia()
-
         setupRecyclerView(binding.statesRecyclerView)
-
-//        var url = "https://www.countryflags.io/"+ args.result.countryCode + "/flat/64.png"
-//        val imageview = findViewById<View>(R.id.imageView1) as ImageView
-//        NetworkHandler.FetchFlag(imageview,url).execute()
-
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -71,7 +64,6 @@ class DetailsActivity : AppCompatActivity() {
                 is NetworkResult.Success -> {
                     Log.i("Sanyam", response.data.toString())
                     response.data?.let { mAdapter.setData(it.data.regional) }
-//                   data to show graphs
                 }
                 is NetworkResult.Error -> {
                     Toast.makeText(
@@ -82,17 +74,14 @@ class DetailsActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
 
     private fun getDataForThisCountry(name:String) {
-
         detailViewModel.getIndividualCountryData(name)
         detailViewModel.countryDetailsDataResponse.observe(this, { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     Log.i("DetailsSummary", response.data.toString())
-//                    response.data?.let { mAdapterCountries.setData(it) }
 //                   data to show graphs
                 }
                 is NetworkResult.Error -> {
@@ -118,7 +107,6 @@ class DetailsActivity : AppCompatActivity() {
             finish()
         } else if (item.itemId == R.id.save_to_favorites_menu && !countrySaved) {
             saveToFavorites(item)
-
         } else if (item.itemId == R.id.save_to_favorites_menu && countrySaved) {
             removeFromFavorites(item)
         }
@@ -132,7 +120,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun checkSavedCountries(menuItem: MenuItem) {
-
         //find solution for it.
         countryViewModel.fetchFavoriteCountries()
         countryViewModel.favouriteCountriesResponse!!.observe(this, { favoriteCountryList ->

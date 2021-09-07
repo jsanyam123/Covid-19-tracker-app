@@ -1,12 +1,10 @@
 package com.example.vCovid.ui.fragments.favorites
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vCovid.R
@@ -27,7 +25,6 @@ class FavoriteCountryFragment : Fragment(), SearchView.OnQueryTextListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentFavoriteCountryBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = countryViewModel
@@ -58,18 +55,15 @@ class FavoriteCountryFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(query != null) {
-//            searchApiData(query)
-            Log.i("Fav hi all",query)
             countryViewModel.filterFavCountries(query)
         }
         return true
     }
 
     override fun onQueryTextChange(query: String?): Boolean {
-        Log.i("Fav hi ",query!!)
-
-        //countryViewModel.favouriteCountriesResponse.observe()
-        countryViewModel.filterFavCountries(query)
+        if(query != null) {
+            countryViewModel.filterFavCountries(query)
+        }
         return true
     }
 }

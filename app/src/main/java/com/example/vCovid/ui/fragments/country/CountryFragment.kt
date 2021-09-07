@@ -2,7 +2,6 @@ package com.example.vCovid.ui.fragments.country
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Toast
@@ -57,16 +56,14 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
         val checkedChipId = binding.chipGroup.findViewById<Chip>(checkedId)
         when(checkedChipId!!.text.toString()) {
             "Confirmed" -> {
-                if(binding.chip1Img.visibility == View.GONE)
-                {
+                if(binding.chip1Img.visibility == View.GONE) {
                     binding.chip1Img.visibility = View.VISIBLE
                     binding.chip2Img.visibility = View.GONE
                     binding.chip1.visibility = View.VISIBLE
                     binding.chip2.visibility = View.GONE
                     sortDataConfirmed(false)
                 }
-                else
-                {
+                else {
                     binding.chip2Img.visibility = View.VISIBLE
                     binding.chip1Img.visibility = View.GONE
                     binding.chip2.visibility = View.VISIBLE
@@ -75,16 +72,14 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
             "Deaths" -> {
-                if(binding.chip3Img.visibility == View.GONE)
-                {
+                if(binding.chip3Img.visibility == View.GONE) {
                     binding.chip3Img.visibility = View.VISIBLE
                     binding.chip4Img.visibility = View.GONE
                     binding.chip3.visibility = View.VISIBLE
                     binding.chip4.visibility = View.GONE
                     sortDataDeaths(false)
                 }
-                else
-                {
+                else {
                     binding.chip4Img.visibility = View.VISIBLE
                     binding.chip3Img.visibility = View.GONE
                     binding.chip4.visibility = View.VISIBLE
@@ -93,16 +88,14 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
             "Active" -> {
-                if(binding.chip5Img.visibility == View.GONE)
-                {
+                if(binding.chip5Img.visibility == View.GONE) {
                     binding.chip5Img.visibility = View.VISIBLE
                     binding.chip6Img.visibility = View.GONE
                     binding.chip5.visibility = View.VISIBLE
                     binding.chip6.visibility = View.GONE
                     sortDataActive(false)
                 }
-                else
-                {
+                else {
                     binding.chip6Img.visibility = View.VISIBLE
                     binding.chip5Img.visibility = View.GONE
                     binding.chip6.visibility = View.VISIBLE
@@ -123,8 +116,7 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                         if(flag){
                             sortedCountriesListConfirmed = it.countries.sortedWith(compareBy{it.totalConfirmed})
                         }
-                        else
-                        {
+                        else {
                             sortedCountriesListConfirmed = it.countries.sortedWith(compareBy{it.totalConfirmed}).reversed()
                         }
                         mAdapterCountries.setData(sortedCountriesListConfirmed) }
@@ -154,11 +146,9 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                         if(flag){
                             sortedCountriesListDeaths = it.countries.sortedWith(compareBy{it.totalDeaths})
                         }
-                        else
-                        {
+                        else {
                             sortedCountriesListDeaths = it.countries.sortedWith(compareBy{it.totalDeaths}).reversed()
                         }
-
                         mAdapterCountries.setData(sortedCountriesListDeaths) }
                 }
                 is NetworkResult.Error -> {
@@ -186,11 +176,9 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                         if(flag){
                             sortedCountriesListActive = it.countries.sortedWith(compareBy{it.totalConfirmed-it.totalDeaths-it.totalRecovered})
                         }
-                        else
-                        {
+                        else {
                             sortedCountriesListActive = it.countries.sortedWith(compareBy{it.totalConfirmed-it.totalDeaths-it.totalRecovered}).reversed()
                         }
-
                         mAdapterCountries.setData(sortedCountriesListActive) }
                 }
                 is NetworkResult.Error -> {
@@ -243,7 +231,6 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                     response.data?.let { it ->
                         var localData = it
                         var countriesList : ArrayList<Country> = arrayListOf()
-
                         localData.countries.forEach {
                             if(it.country.toLowerCase(Locale.getDefault()).contains(query!!)) {
                                 countriesList.add(it)
@@ -266,8 +253,6 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
         })
     }
 
-
-
     private fun requestApiDataForCountries() {
         countryViewModel.getSummaryCountries()
         countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
@@ -276,10 +261,7 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                     hideShimmerEffect()
                     response.data?.let {
                         val sortedData = it.countries
-//                        val sortedDataConf = it.countries.sortedWith(compareBy{it.totalConfirmed}).reversed()
-//                        val sortedDataDeaths = sortedDataConf.sortedWith(compareBy{it.totalDeaths}).reversed()
                         mAdapterCountries.setData(sortedData) }
-                        Log.i("SanyamJain",response.data!!.countries[28].totalRecovered.toString())
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
