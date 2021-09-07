@@ -48,10 +48,8 @@ class DetailsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         getDataForThisCountry(args.result.country)
 
-        //getStatesDataforIndia()
+        getStatesDataforIndia()
 
-
-        //binding.mAdapter = mAdapter
         setupRecyclerView(binding.statesRecyclerView)
 
 //        var url = "https://www.countryflags.io/"+ args.result.countryCode + "/flat/64.png"

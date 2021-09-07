@@ -48,9 +48,69 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
         setupRecyclerViewForCountries()
         requestApiDataForCountries()
         binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-
+            handleChipRequest(checkedId)
         }
         return binding.root
+    }
+
+    private fun handleChipRequest(checkedId:Int){
+        val checkedChipId = binding.chipGroup.findViewById<Chip>(checkedId)
+        when(checkedChipId!!.text.toString()) {
+            "Total" -> {
+                if(binding.chip1Img.visibility == View.GONE)
+                {
+                    binding.chip1Img.visibility = View.VISIBLE
+                    binding.chip2Img.visibility = View.GONE
+                    binding.chip1.visibility = View.VISIBLE
+                    binding.chip2.visibility = View.GONE
+                    sortDataConfirmed(false)
+                }
+                else
+                {
+                    binding.chip2Img.visibility = View.VISIBLE
+                    binding.chip1Img.visibility = View.GONE
+                    binding.chip2.visibility = View.VISIBLE
+                    binding.chip1.visibility = View.GONE
+                    sortDataConfirmed(true)
+                }
+            }
+            "Deaths" -> {
+                if(binding.chip3Img.visibility == View.GONE)
+                {
+                    binding.chip3Img.visibility = View.VISIBLE
+                    binding.chip4Img.visibility = View.GONE
+                    binding.chip3.visibility = View.VISIBLE
+                    binding.chip4.visibility = View.GONE
+                    sortDataDeaths(false)
+                }
+                else
+                {
+                    binding.chip4Img.visibility = View.VISIBLE
+                    binding.chip3Img.visibility = View.GONE
+                    binding.chip4.visibility = View.VISIBLE
+                    binding.chip3.visibility = View.GONE
+                    sortDataDeaths(true)
+                }
+            }
+            "Active" -> {
+                if(binding.chip5Img.visibility == View.GONE)
+                {
+                    binding.chip5Img.visibility = View.VISIBLE
+                    binding.chip6Img.visibility = View.GONE
+                    binding.chip5.visibility = View.VISIBLE
+                    binding.chip6.visibility = View.GONE
+                    sortDataActive(false)
+                }
+                else
+                {
+                    binding.chip6Img.visibility = View.VISIBLE
+                    binding.chip5Img.visibility = View.GONE
+                    binding.chip6.visibility = View.VISIBLE
+                    binding.chip5.visibility = View.GONE
+                    sortDataActive(true)
+                }
+            }
+        }
     }
 
     private fun sortDataConfirmed(flag:Boolean){

@@ -2,14 +2,11 @@ package com.example.vCovid.bindingadapters
 
 import android.icu.text.CompactDecimalFormat
 
-import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 
 import androidx.databinding.BindingAdapter
-import java.text.DateFormat.SHORT
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -60,11 +57,12 @@ class DetailsActivityBinding {
         @BindingAdapter("setDate")
         @JvmStatic
         fun setDate(textView: TextView, dateStr: String) {
-
-            textView.text = dateStr
+            val date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+                .parse(dateStr.replace("Z$".toRegex(), "+0000"))
+            Log.i("Sam",date.toString())
+            val formattedDate = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss ").format(date)
+            textView.text = formattedDate
         }
-
-
 
     }
 }

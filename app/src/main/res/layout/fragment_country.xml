@@ -81,6 +81,26 @@
                 android:visibility="gone"
                 app:chipBackgroundColor="@color/white" />
 
+            <ImageView
+                android:id="@+id/chip1Img"
+                android:layout_width="24dp"
+                android:layout_marginEnd="10dp"
+                android:layout_height="50dp"
+                app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
+                android:visibility="visible"
+                />
+
+            <ImageView
+                android:id="@+id/chip2Img"
+                android:layout_width="24dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_arrow_upward"
+                android:visibility="gone"
+
+                />
+
+
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_3"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -103,7 +123,24 @@
                 android:visibility="gone"
                 app:chipBackgroundColor="@color/white" />
 
+            <ImageView
+                android:id="@+id/chip3Img"
+                android:layout_width="24dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
+                android:visibility="visible"
+                />
 
+            <ImageView
+                android:id="@+id/chip4Img"
+                android:layout_width="24dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_arrow_upward"
+                android:visibility="gone"
+
+                />
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_5"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -128,6 +165,23 @@
                 android:visibility="gone"
                 app:chipBackgroundColor="@color/white" />
 
+            <ImageView
+                android:id="@+id/chip5Img"
+                android:layout_width="24dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_baseline_arrow_downward_24"
+                android:visibility="visible"
+                />
+
+            <ImageView
+                android:id="@+id/chip6Img"
+                android:layout_width="24dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_arrow_upward"
+                android:visibility="gone"
+                />
 
 
         </com.google.android.material.chip.ChipGroup>
