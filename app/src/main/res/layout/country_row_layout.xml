@@ -47,12 +47,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="Total"
+                    android:text="Confirmed"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/countryName"
-                    tools:text="Total" />
+                    tools:text="Confirmed" />
 
                 <TextView
                     android:id="@+id/Discharged"
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Discharged"
-                    android:textColor="@color/mattgold"
+                    android:textColor="@color/hotgreen"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/Deaths"
                     app:layout_constraintStart_toEndOf="@+id/Active"
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Active"
-                    android:textColor="@color/hotgreen"
+                    android:textColor="@color/mattgold"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/Discharged"
                     app:layout_constraintStart_toEndOf="@+id/Cases"
@@ -98,14 +98,14 @@
                     setConfirmed="@{result.totalConfirmed}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="100"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Cases"
+                    app:layout_constraintStart_toStartOf="@+id/Cases"
                     app:layout_constraintTop_toBottomOf="@+id/Cases" />
 
 
@@ -119,12 +119,13 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="50"
-                    android:textColor="@color/hotgreen"
+                    android:textColor="@color/mattgold"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/dischargednum"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Active" />
+                    app:layout_constraintEnd_toEndOf="@+id/Active"
+                    app:layout_constraintStart_toStartOf="@+id/Active"
+                    app:layout_constraintTop_toBottomOf="@+id/Active"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/dischargednum"
@@ -134,11 +135,11 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="50"
-                    android:textColor="@color/mattgold"
+                    android:textColor="@color/hotgreen"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/activeNum"
-                    app:layout_constraintStart_toEndOf="@+id/deathsnum"
+                    app:layout_constraintEnd_toEndOf="@+id/Discharged"
+                    app:layout_constraintStart_toStartOf="@+id/Discharged"
                     app:layout_constraintTop_toBottomOf="@+id/Discharged"
                     app:layout_constraintVertical_bias="0.0" />
 
@@ -148,14 +149,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="20"
                     android:textColor="@color/red"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Active" />
+                    app:layout_constraintEnd_toEndOf="@+id/Deaths"
+                    app:layout_constraintStart_toStartOf="@+id/Deaths"
+                    app:layout_constraintTop_toBottomOf="@+id/Active"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/imageViewFlag"
