@@ -35,8 +35,6 @@ class DetailViewModel @ViewModelInject constructor(
             try {
                 val response = repository.remote.getStates()
                 statesResponse.value = handleStatesResponse(response)
-//                Log.i("Sanyam",statesResponse.value!!.data.toString())
-
             } catch (e: Exception) {
                 statesResponse.value = NetworkResult.Error("States not found.")
             }
@@ -55,7 +53,6 @@ class DetailViewModel @ViewModelInject constructor(
                 NetworkResult.Error(response.message())
             }
         }
-
     }
 
     fun getIndividualCountryData(name:String) =  viewModelScope.launch {
@@ -69,9 +66,8 @@ class DetailViewModel @ViewModelInject constructor(
                 val response = repository.remote.getDayOneIndividualData(name)
                 Log.i("summary", response.body().toString())
                 countryDetailsDataResponse.value = handleOneDayResponse(response)
-
             } catch (e: Exception) {
-                countryDetailsDataResponse.value = NetworkResult.Error("Recipes not found.")
+                countryDetailsDataResponse.value = NetworkResult.Error("Details not found.")
             }
         } else {
             countryDetailsDataResponse.value = NetworkResult.Error("No Internet Connection.")
@@ -79,13 +75,13 @@ class DetailViewModel @ViewModelInject constructor(
     }
 
     private fun handleOneDayResponse(response: Response<CountryDetailsData>): NetworkResult<CountryDetailsData>? {
-        when {
+        return when {
             response.isSuccessful -> {
                 val dayonedata = response.body()
-                return NetworkResult.Success(dayonedata!!)
+                NetworkResult.Success(dayonedata!!)
             }
             else -> {
-                return NetworkResult.Error(response.message())
+                NetworkResult.Error(response.message())
             }
         }
     }
@@ -103,6 +99,5 @@ class DetailViewModel @ViewModelInject constructor(
             else -> false
         }
     }
-
 
 }
