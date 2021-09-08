@@ -80,7 +80,7 @@
                         android:textSize="20sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:text="India" />
+                        tools:text="@string/country" />
 
                     <TextView
                         android:id="@+id/StatesDate"
@@ -93,7 +93,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/favCountryName"
-                        tools:text="Date" />
+                        tools:text="@string/date" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
