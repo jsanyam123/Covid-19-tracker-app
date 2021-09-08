@@ -2,7 +2,6 @@ package com.example.vCovid.util
 
 import androidx.recyclerview.widget.DiffUtil
 
-
 class CountryDiffUtil<T>(
     private val oldList: List<T>,
     private val newList: List<T>

@@ -51,7 +51,6 @@ class CountryViewModel @ViewModelInject constructor(
     fun filterFavCountries(query:String?) {
 
         var countriesList : ArrayList<FavouriteCountryModel> = arrayListOf()
-
         favcon!!.forEach {
             if(it.name.toLowerCase(Locale.getDefault()).contains(query!!))
             {
@@ -66,15 +65,12 @@ class CountryViewModel @ViewModelInject constructor(
         var details = gson.toJson(countryDetails)
         dbHandler.addFavouriteCountry(FavouriteCountryModel(0, name, details))
     }
-
     fun deleteFavCountry(id:Int) {
         dbHandler.deleteFavouriteCountry(id)
     }
 
     /** RETROFIT */
-
     var summaryResponse : MutableLiveData<NetworkResult<SummaryData>> = MutableLiveData()
-
     fun getSummaryCountries() = viewModelScope.launch {
         getSummaryCountriesSafeCall()
     }
