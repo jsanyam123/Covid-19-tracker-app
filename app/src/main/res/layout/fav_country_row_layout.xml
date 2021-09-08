@@ -14,22 +14,9 @@
         android:id="@+id/favCountryLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="1dp"
         onFavCountryClickListener="@{favoritesCountry}"
-        android:layout_marginBottom="4dp">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/favRowCardView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.48000002"
-            app:strokeColor="@color/lightMediumGray"
-            app:strokeWidth="1dp">
+        android:layout_marginBottom="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -71,92 +58,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_error_placeholder" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/favCases"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:text="Confirmed"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/favCountryName" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/favDeaths"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="0dp"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:text="Deaths"-->
-<!--                    android:textColor="@color/red"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintEnd_toStartOf="@+id/favActive"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/favCases"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/favCountryName" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/favActive"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:text="Active"-->
-<!--                    android:textColor="@color/darkgreen"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/favCountryName" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/favCasesNum"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:text="100"-->
-<!--                    setConfirmedFav = "@{favoritesCountry.totalConfirmed}"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="@+id/favCases"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/favCases"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/favCases" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/favDeathsNum"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:text="50"-->
-<!--                    setDeathsFav="@{favoritesCountry.totalDeaths}"-->
-<!--                    android:textColor="@color/red"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="@+id/favDeaths"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/favDeaths"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/favDeaths" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/favActiveNum"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginBottom="16dp"-->
-<!--                    android:text="20"-->
-<!--                    confirmedFav="@{favoritesCountry.totalConfirmed}"-->
-<!--                    recoveredFav="@{favoritesCountry.totalRecovered}"-->
-<!--                    deathsFav="@{favoritesCountry.totalDeaths}"-->
-<!--                    android:textColor="@color/darkgreen"-->
-<!--                    android:textSize="18sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="@+id/favActive"-->
-<!--                    app:layout_constraintStart_toStartOf="@+id/favActive"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/favActive" />-->
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

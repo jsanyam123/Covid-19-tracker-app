@@ -9,6 +9,7 @@ import com.example.vCovid.models.FavouriteCountryModel
 import com.example.vCovid.databinding.FavCountryRowLayoutBinding
 import com.example.vCovid.models.summary.Country
 import com.example.vCovid.util.Constants.Companion.BASE_URL_FLAG
+import com.example.vCovid.util.Constants.Companion.FLAG_STYLE
 import com.example.vCovid.util.CountryDiffUtil
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -24,7 +25,7 @@ class FavoriteCountryAdapter: RecyclerView.Adapter<FavoriteCountryAdapter.MyView
         fun bind(favouriteCountryModel: FavouriteCountryModel) {
             val favCountry = stringToCountry(favouriteCountryModel.details)
             binding.favoritesCountry = favCountry
-            var url = BASE_URL_FLAG +favCountry.countryCode+"/shiny/64.png"
+            var url = BASE_URL_FLAG +favCountry.countryCode+ FLAG_STYLE
             NetworkHandler.FetchFlag(binding.imageViewFlagFav,url).execute()
             binding.executePendingBindings()
         }
