@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vCovid.data.NetworkHandler
 import com.example.vCovid.databinding.CountryRowLayoutBinding
 import com.example.vCovid.models.summary.Country
+import com.example.vCovid.util.Constants.Companion.BASE_URL_FLAG
 import com.example.vCovid.util.CountryDiffUtil
 
 // Adapter to show countries list on country fragment
@@ -17,7 +18,7 @@ class CountriesAdapter : RecyclerView.Adapter<CountriesAdapter.MyViewHolder>() {
         fun bind(result: Country){
             binding.result = result
 
-            var url = "https://www.countryflags.io/"+result.countryCode+"/shiny/64.png"
+            var url = BASE_URL_FLAG + result.countryCode+ "/shiny/64.png"
             NetworkHandler.FetchFlag(binding.imageViewFlag,url).execute()
             binding.executePendingBindings()
         }

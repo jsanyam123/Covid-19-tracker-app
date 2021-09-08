@@ -2,7 +2,8 @@ package com.example.vCovid.di
 
 import com.example.vCovid.data.network.IndianStatesAPI
 import com.example.vCovid.data.network.CovidApi
-import com.example.vCovid.util.Constants.Companion.BASE_URL
+import com.example.vCovid.util.Constants.Companion.BASE_URL_COVID
+import com.example.vCovid.util.Constants.Companion.BASE_URL_INDIA
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,7 +42,7 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BASE_URL_COVID)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .build()
@@ -55,7 +56,7 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.rootnet.in/covid19-in/")
+            .baseUrl(BASE_URL_INDIA)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .build()
