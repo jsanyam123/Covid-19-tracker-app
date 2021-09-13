@@ -120,7 +120,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun checkSavedCountries(menuItem: MenuItem) {
-        //find solution for it.
         countryViewModel.fetchFavoriteCountries()
         countryViewModel.favouriteCountriesResponse!!.observe(this, { favoriteCountryList ->
             try {
