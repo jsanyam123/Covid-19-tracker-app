@@ -18,14 +18,13 @@ class CountryRowBinding {
         @BindingAdapter("onCountryClickListener")
         @JvmStatic
         fun onCountryClickListener(countryRowLayout: ConstraintLayout, result: Country) {
-            Log.d("onRecipeClickListener", "CALLED")
             countryRowLayout.setOnClickListener {
                 try {
                     val action =
                         CountryFragmentDirections.actionCountryFragmentToDetailsActivity(result)
                     countryRowLayout.findNavController().navigate(action)
                 } catch (e: Exception) {
-                    Log.d("onRecipeClickListener", e.toString())
+                    Log.d("onCountryClickListener", e.toString())
                 }
             }
         }
