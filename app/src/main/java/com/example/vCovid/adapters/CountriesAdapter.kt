@@ -20,7 +20,8 @@ class CountriesAdapter : RecyclerView.Adapter<CountriesAdapter.MyViewHolder>() {
             binding.result = result
 
             var url = BASE_URL_FLAG + result.countryCode+ FLAG_STYLE
-            NetworkHandler.FetchFlag(binding.imageViewFlag,url).execute()
+//            NetworkHandler.FetchFlag(binding.imageViewFlag,url).execute()
+            NetworkHandler().flagCall(binding.imageViewFlag,url)
             binding.executePendingBindings()
         }
 
