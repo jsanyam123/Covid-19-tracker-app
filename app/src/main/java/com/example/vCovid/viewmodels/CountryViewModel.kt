@@ -6,7 +6,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.vCovid.data.Databasehandler
 import com.example.vCovid.models.FavouriteCountryModel
 import com.example.vCovid.data.Repository
 import com.example.vCovid.models.summary.Country
@@ -21,14 +20,13 @@ import kotlin.collections.ArrayList
 
 class CountryViewModel @ViewModelInject constructor(
     private val repository: Repository,
-    application: Application,
-    private val dbHandler: Databasehandler
+    application: Application
 ) : AndroidViewModel(application) {
     var favouriteCountriesResponse :MutableLiveData<NetworkResult<List<FavouriteCountryModel>>> = MutableLiveData()
     var favouriteCountries : ArrayList<FavouriteCountryModel>? = null
     var summaryResponse : MutableLiveData<NetworkResult<SummaryData>> = MutableLiveData()
     fun fetchFavoriteCountries() {
-        favouriteCountries = dbHandler.fetchFavCountries()
+        favouriteCountries = repository.dbHandler.fetchFavCountries()
         favouriteCountriesResponse.value = NetworkResult.Success(favouriteCountries!!)
     }
 
@@ -45,11 +43,11 @@ class CountryViewModel @ViewModelInject constructor(
     fun insertFavCountry(name:String, countryDetails:Country) {
         var gson = Gson()
         var details = gson.toJson(countryDetails)
-        dbHandler.addFavouriteCountry(FavouriteCountryModel(0, name, details))
+        repository.dbHandler.addFavouriteCountry(FavouriteCountryModel(0, name, details))
     }
 
     fun deleteFavCountry(id:Int) {
-        dbHandler.deleteFavouriteCountry(id)
+        repository.dbHandler.deleteFavouriteCountry(id)
     }
 
     fun getSummaryCountries() = viewModelScope.launch {

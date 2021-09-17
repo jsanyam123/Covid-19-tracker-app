@@ -11,8 +11,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject
 
-@ActivityRetainedScoped
-class Databasehandler @Inject constructor(@ApplicationContext context: Context) :
+class Databasehandler  constructor( context: Context) :
     SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
