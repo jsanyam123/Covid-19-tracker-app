@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.example.vCovid.models.FavouriteCountryModel
@@ -25,6 +26,58 @@ class CountryViewModel @ViewModelInject constructor(
     var favouriteCountriesResponse :MutableLiveData<NetworkResult<List<FavouriteCountryModel>>> = MutableLiveData()
     var favouriteCountries : ArrayList<FavouriteCountryModel>? = null
     var summaryResponse : MutableLiveData<NetworkResult<SummaryData>> = MutableLiveData()
+
+    fun sortSummaryResponse(flag:Boolean,criteria:String){
+        var countryList = summaryResponse.value?.data?.countries
+        var dummy : List<Country>?
+        when (criteria) {
+            "Confirmed" -> {
+                if(flag){
+                    dummy = countryList?.sortedWith(compareBy{it.totalConfirmed})
+                    summaryResponse.value = NetworkResult.Success(dummy?.let { SummaryData(it,"","","") })
+                }
+                else{
+                    dummy = countryList?.sortedWith(compareBy{it.totalConfirmed})?.reversed()
+                    summaryResponse.value = NetworkResult.Success(dummy?.let { SummaryData(it,"","","") })
+                }
+            }
+            "Deaths" -> {
+                if(flag){
+                    dummy = countryList?.sortedWith(compareBy{it.totalDeaths})
+                    summaryResponse.value = NetworkResult.Success(dummy?.let { SummaryData(it,"","","") })
+                }
+                else{
+                    dummy = countryList?.sortedWith(compareBy{it.totalDeaths})?.reversed()
+                    summaryResponse.value = NetworkResult.Success(dummy?.let { SummaryData(it,"","","") })
+                }
+            }
+            "Active" -> {
+                if(flag){
+                    dummy = countryList?.sortedWith(compareBy{it.totalConfirmed-it.totalDeaths-it.totalRecovered})
+                    summaryResponse.value = NetworkResult.Success(dummy?.let { SummaryData(it,"","","") })
+                }
+                else{
+                    dummy = countryList?.sortedWith(compareBy{it.totalConfirmed-it.totalDeaths-it.totalRecovered})?.reversed()
+                    summaryResponse.value = NetworkResult.Success(dummy?.let { SummaryData(it,"","","") })
+                }
+            }
+
+
+        }
+    }
+
+    fun filterCountriesList(query:String):ArrayList<Country>
+    {
+        var countryList = summaryResponse.value?.data?.countries
+        var filteredList : ArrayList<Country> = ArrayList()
+        countryList?.forEach {
+            if(it.country.toLowerCase(Locale.getDefault()).contains(query)) {
+                filteredList.add(it)
+            }
+        }
+        return filteredList
+    }
+
     fun fetchFavoriteCountries() {
         favouriteCountries = repository.dbHandler.fetchFavCountries()
         favouriteCountriesResponse.value = NetworkResult.Success(favouriteCountries)

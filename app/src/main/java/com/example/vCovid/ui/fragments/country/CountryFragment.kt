@@ -46,13 +46,14 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
         setHasOptionsMenu(true)
         setupRecyclerViewForCountries()
         requestApiDataForCountries()
+        observeAndUpdateView()
         binding?.chipGroup?.setOnCheckedChangeListener { group, checkedId ->
             handleChipRequest(checkedId)
         }
         return binding?.root
     }
 
-    private fun handleChipRequest(checkedId:Int){
+    private fun handleChipRequest(checkedId:Int) {
         if(binding == null) return
         val checkedChipId = binding?.chipGroup?.findViewById<Chip>(checkedId)
         when(checkedChipId?.text.toString()) {
@@ -108,93 +109,15 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun sortDataConfirmed(flag:Boolean){
-        countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    hideShimmerEffect()
-                    response.data?.let { it ->
-                        var sortedCountriesListConfirmed: List<Country>
-                        if(flag){
-                            sortedCountriesListConfirmed = it.countries.sortedWith(compareBy{it.totalConfirmed})
-                        }
-                        else {
-                            sortedCountriesListConfirmed = it.countries.sortedWith(compareBy{it.totalConfirmed}).reversed()
-                        }
-                        mAdapterCountries.setData(sortedCountriesListConfirmed) }
-                }
-                is NetworkResult.Error -> {
-                    hideShimmerEffect()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    showShimmerEffect()
-                }
-            }
-        })
+        countryViewModel.sortSummaryResponse(flag,"Confirmed")
     }
 
     private fun sortDataDeaths(flag:Boolean){
-        countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    hideShimmerEffect()
-                    response.data?.let { it ->
-                        var sortedCountriesListDeaths :List<Country>
-                        if(flag){
-                            sortedCountriesListDeaths = it.countries.sortedWith(compareBy{it.totalDeaths})
-                        }
-                        else {
-                            sortedCountriesListDeaths = it.countries.sortedWith(compareBy{it.totalDeaths}).reversed()
-                        }
-                        mAdapterCountries.setData(sortedCountriesListDeaths) }
-                }
-                is NetworkResult.Error -> {
-                    hideShimmerEffect()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    showShimmerEffect()
-                }
-            }
-        })
+        countryViewModel.sortSummaryResponse(flag,"Deaths")
     }
 
     private fun sortDataActive(flag:Boolean){
-        countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    hideShimmerEffect()
-                    response.data?.let { it ->
-                        var sortedCountriesListActive :List<Country>
-                        if(flag){
-                            sortedCountriesListActive = it.countries.sortedWith(compareBy{it.totalConfirmed-it.totalDeaths-it.totalRecovered})
-                        }
-                        else {
-                            sortedCountriesListActive = it.countries.sortedWith(compareBy{it.totalConfirmed-it.totalDeaths-it.totalRecovered}).reversed()
-                        }
-                        mAdapterCountries.setData(sortedCountriesListActive) }
-                }
-                is NetworkResult.Error -> {
-                    hideShimmerEffect()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    showShimmerEffect()
-                }
-            }
-        })
+        countryViewModel.sortSummaryResponse(flag,"Active")
     }
 
     private fun setupRecyclerViewForCountries() {
@@ -221,19 +144,17 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun filterResult(query: String) {
+        var filteredlist = countryViewModel.filterCountriesList(query)
+        mAdapterCountries.setData(filteredlist)
+    }
+
+    private fun observeAndUpdateView() {
         countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
-                    response.data?.let { it ->
-                        var localData = it
-                        var countriesList : ArrayList<Country> = arrayListOf()
-                        localData.countries.forEach {
-                            if(it.country.toLowerCase(Locale.getDefault()).contains(query)) {
-                                countriesList.add(it)
-                            }
-                        }
-                        mAdapterCountries.setData(countriesList) }
+                    response.data?.let {
+                        mAdapterCountries.setData(it.countries) }
                 }
                 is NetworkResult.Error -> {
                     hideShimmerEffect()
@@ -252,27 +173,6 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private fun requestApiDataForCountries() {
         countryViewModel.getSummaryCountries()
-        countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
-            when (response) {
-                is NetworkResult.Success -> {
-                    hideShimmerEffect()
-                    response.data?.let {
-                        val sortedData = it.countries
-                        mAdapterCountries.setData(sortedData) }
-                }
-                is NetworkResult.Error -> {
-                    hideShimmerEffect()
-                    Toast.makeText(
-                        requireContext(),
-                        response.message.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-                is NetworkResult.Loading -> {
-                    showShimmerEffect()
-                }
-            }
-        })
     }
 
     private fun showShimmerEffect() {
