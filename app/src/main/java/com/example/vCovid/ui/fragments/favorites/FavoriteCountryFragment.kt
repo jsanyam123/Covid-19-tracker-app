@@ -19,20 +19,20 @@ class FavoriteCountryFragment : Fragment(), SearchView.OnQueryTextListener {
     private val mAdapter: FavoriteCountryAdapter by lazy { FavoriteCountryAdapter() }
     private val countryViewModel: CountryViewModel by viewModels()
     private var _binding: FragmentFavoriteCountryBinding? = null
-    private val binding get() = _binding!!
-
+    private val binding get() = _binding
+    private var searchQuery : String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFavoriteCountryBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
-        binding.mainViewModel = countryViewModel
+        binding?.lifecycleOwner = this
+        binding?.mainViewModel = countryViewModel
         setHasOptionsMenu(true)
-        binding.mAdapter = mAdapter
-        setupRecyclerView(binding.favoriteCountryRecyclerView)
+        binding?.mAdapter = mAdapter
+        binding?.favoriteCountryRecyclerView?.let { setupRecyclerView(it) }
         countryViewModel.fetchFavoriteCountries()
-        return binding.root
+        return binding?.root
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -43,6 +43,12 @@ class FavoriteCountryFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        countryViewModel.fetchFavoriteCountries()
+        countryViewModel.filterFavCountries(searchQuery)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -56,6 +62,7 @@ class FavoriteCountryFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onQueryTextSubmit(query: String?): Boolean {
         if(query != null) {
             countryViewModel.filterFavCountries(query)
+            searchQuery = query
         }
         return true
     }
@@ -63,6 +70,7 @@ class FavoriteCountryFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(query: String?): Boolean {
         if(query != null) {
             countryViewModel.filterFavCountries(query)
+            searchQuery = query
         }
         return true
     }

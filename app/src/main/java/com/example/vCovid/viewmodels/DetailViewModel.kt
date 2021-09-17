@@ -47,7 +47,7 @@ class DetailViewModel @ViewModelInject constructor(
         return when {
             response.isSuccessful -> {
                 val summary = response.body()
-                NetworkResult.Success(summary!!)
+                NetworkResult.Success(summary)
             }
             else -> {
                 NetworkResult.Error(response.message())
@@ -78,7 +78,7 @@ class DetailViewModel @ViewModelInject constructor(
         return when {
             response.isSuccessful -> {
                 val dayonedata = response.body()
-                NetworkResult.Success(dayonedata!!)
+                NetworkResult.Success(dayonedata)
             }
             else -> {
                 NetworkResult.Error(response.message())

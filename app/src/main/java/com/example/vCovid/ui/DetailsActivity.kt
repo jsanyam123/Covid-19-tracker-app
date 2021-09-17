@@ -62,7 +62,6 @@ class DetailsActivity : AppCompatActivity() {
         detailViewModel.statesResponse.observe(this, { response ->
             when (response) {
                 is NetworkResult.Success -> {
-                    Log.i("Sanyam", response.data.toString())
                     response.data?.let { mAdapter.setData(it.data.regional) }
                 }
                 is NetworkResult.Error -> {
@@ -98,7 +97,7 @@ class DetailsActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         val menuItem = menu?.findItem(R.id.save_to_favorites_menu)
-        checkSavedCountries(menuItem!!)
+        menuItem?.let { checkSavedCountries(it) }
         return true
     }
 
@@ -121,17 +120,19 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun checkSavedCountries(menuItem: MenuItem) {
         countryViewModel.fetchFavoriteCountries()
-        countryViewModel.favouriteCountriesResponse!!.observe(this, { favoriteCountryList ->
+        countryViewModel.favouriteCountriesResponse.observe(this, { favoriteCountryList ->
             try {
-                for (savedRecipe in favoriteCountryList.data!!) {
-                    if(stringToCountry(savedRecipe.details).iD == args.result.iD){
-                        changeMenuItemColor(menuItem, R.color.yellow)
-                        savedCountryId = savedRecipe.id
-                        countrySaved = true
-                        break
-                    }
-                    else{
-                        changeMenuItemColor(menuItem,R.color.white)
+                val data = favoriteCountryList?.data
+                if (data != null) {
+                    for (savedRecipe in data) {
+                        if(stringToCountry(savedRecipe.details).iD == args.result.iD){
+                            changeMenuItemColor(menuItem, R.color.yellow)
+                            savedCountryId = savedRecipe.id
+                            countrySaved = true
+                            break
+                        } else{
+                            changeMenuItemColor(menuItem,R.color.white)
+                        }
                     }
                 }
             } catch (e: Exception) {

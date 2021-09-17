@@ -26,7 +26,7 @@ import com.google.android.material.chip.Chip
 class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private var _binding: FragmentCountryBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
     private lateinit var countryViewModel: CountryViewModel
     private val mAdapterCountries by lazy {CountriesAdapter()}
 
@@ -41,65 +41,66 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCountryBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
-        binding.mainViewModel = countryViewModel
+        binding?.lifecycleOwner = this
+        binding?.mainViewModel = countryViewModel
         setHasOptionsMenu(true)
         setupRecyclerViewForCountries()
         requestApiDataForCountries()
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+        binding?.chipGroup?.setOnCheckedChangeListener { group, checkedId ->
             handleChipRequest(checkedId)
         }
-        return binding.root
+        return binding?.root
     }
 
     private fun handleChipRequest(checkedId:Int){
-        val checkedChipId = binding.chipGroup.findViewById<Chip>(checkedId)
-        when(checkedChipId!!.text.toString()) {
+        if(binding == null) return
+        val checkedChipId = binding?.chipGroup?.findViewById<Chip>(checkedId)
+        when(checkedChipId?.text.toString()) {
             "Confirmed" -> {
-                if(binding.chip1Img.visibility == View.GONE) {
-                    binding.chip1Img.visibility = View.VISIBLE
-                    binding.chip2Img.visibility = View.GONE
-                    binding.chip1.visibility = View.VISIBLE
-                    binding.chip2.visibility = View.GONE
+                if(binding?.chip1Img?.visibility == View.GONE) {
+                    binding?.chip1Img?.visibility = View.VISIBLE
+                    binding?.chip2Img?.visibility = View.GONE
+                    binding?.chip1?.visibility = View.VISIBLE
+                    binding?.chip2?.visibility = View.GONE
                     sortDataConfirmed(false)
                 }
                 else {
-                    binding.chip2Img.visibility = View.VISIBLE
-                    binding.chip1Img.visibility = View.GONE
-                    binding.chip2.visibility = View.VISIBLE
-                    binding.chip1.visibility = View.GONE
+                    binding?.chip2Img?.visibility = View.VISIBLE
+                    binding?.chip1Img?.visibility = View.GONE
+                    binding?.chip2?.visibility = View.VISIBLE
+                    binding?.chip1?.visibility = View.GONE
                     sortDataConfirmed(true)
                 }
             }
             "Deaths" -> {
-                if(binding.chip3Img.visibility == View.GONE) {
-                    binding.chip3Img.visibility = View.VISIBLE
-                    binding.chip4Img.visibility = View.GONE
-                    binding.chip3.visibility = View.VISIBLE
-                    binding.chip4.visibility = View.GONE
+                if(binding?.chip3Img?.visibility == View.GONE) {
+                    binding?.chip3Img?.visibility = View.VISIBLE
+                    binding?.chip4Img?.visibility = View.GONE
+                    binding?.chip3?.visibility = View.VISIBLE
+                    binding?.chip4?.visibility = View.GONE
                     sortDataDeaths(false)
                 }
                 else {
-                    binding.chip4Img.visibility = View.VISIBLE
-                    binding.chip3Img.visibility = View.GONE
-                    binding.chip4.visibility = View.VISIBLE
-                    binding.chip3.visibility = View.GONE
+                    binding?.chip4Img?.visibility = View.VISIBLE
+                    binding?.chip3Img?.visibility = View.GONE
+                    binding?.chip4?.visibility = View.VISIBLE
+                    binding?.chip3?.visibility = View.GONE
                     sortDataDeaths(true)
                 }
             }
             "Active" -> {
-                if(binding.chip5Img.visibility == View.GONE) {
-                    binding.chip5Img.visibility = View.VISIBLE
-                    binding.chip6Img.visibility = View.GONE
-                    binding.chip5.visibility = View.VISIBLE
-                    binding.chip6.visibility = View.GONE
+                if(binding?.chip5Img?.visibility == View.GONE) {
+                    binding?.chip5Img?.visibility = View.VISIBLE
+                    binding?.chip6Img?.visibility = View.GONE
+                    binding?.chip5?.visibility = View.VISIBLE
+                    binding?.chip6?.visibility = View.GONE
                     sortDataActive(false)
                 }
                 else {
-                    binding.chip6Img.visibility = View.VISIBLE
-                    binding.chip5Img.visibility = View.GONE
-                    binding.chip6.visibility = View.VISIBLE
-                    binding.chip5.visibility = View.GONE
+                    binding?.chip6Img?.visibility = View.VISIBLE
+                    binding?.chip5Img?.visibility = View.GONE
+                    binding?.chip6?.visibility = View.VISIBLE
+                    binding?.chip5?.visibility = View.GONE
                     sortDataActive(true)
                 }
             }
@@ -197,8 +198,8 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun setupRecyclerViewForCountries() {
-        binding.countriesRecyclerView.adapter = mAdapterCountries
-        binding.countriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding?.countriesRecyclerView?.adapter = mAdapterCountries
+        binding?.countriesRecyclerView?.layoutManager = LinearLayoutManager(requireContext())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -209,21 +210,17 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
         searchView?.setOnQueryTextListener(this)
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null) {
-            filterResult(query)
-        }
+    override fun onQueryTextSubmit(query: String): Boolean {
+        filterResult(query)
         return true
     }
 
-    override fun onQueryTextChange(query: String?): Boolean {
-        if(query != null) {
-            filterResult(query.toLowerCase(Locale.getDefault()))
-        }
+    override fun onQueryTextChange(query: String): Boolean {
+        filterResult(query.toLowerCase(Locale.getDefault()))
         return true
     }
 
-    private fun filterResult(query: String?) {
+    private fun filterResult(query: String) {
         countryViewModel.summaryResponse.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is NetworkResult.Success -> {
@@ -232,7 +229,7 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
                         var localData = it
                         var countriesList : ArrayList<Country> = arrayListOf()
                         localData.countries.forEach {
-                            if(it.country.toLowerCase(Locale.getDefault()).contains(query!!)) {
+                            if(it.country.toLowerCase(Locale.getDefault()).contains(query)) {
                                 countriesList.add(it)
                             }
                         }
@@ -279,11 +276,11 @@ class CountryFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
     private fun showShimmerEffect() {
-        binding.countriesRecyclerView.showShimmer()
+        binding?.countriesRecyclerView?.showShimmer()
     }
 
     private fun hideShimmerEffect() {
-        binding.countriesRecyclerView.hideShimmer()
+        binding?.countriesRecyclerView?.hideShimmer()
     }
 
     override fun onDestroy() {

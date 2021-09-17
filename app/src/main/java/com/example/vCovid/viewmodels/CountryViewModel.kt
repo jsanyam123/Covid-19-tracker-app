@@ -27,13 +27,13 @@ class CountryViewModel @ViewModelInject constructor(
     var summaryResponse : MutableLiveData<NetworkResult<SummaryData>> = MutableLiveData()
     fun fetchFavoriteCountries() {
         favouriteCountries = repository.dbHandler.fetchFavCountries()
-        favouriteCountriesResponse.value = NetworkResult.Success(favouriteCountries!!)
+        favouriteCountriesResponse.value = NetworkResult.Success(favouriteCountries)
     }
 
-    fun filterFavCountries(query:String?) {
+    fun filterFavCountries(query:String) {
         var countriesList : ArrayList<FavouriteCountryModel> = arrayListOf()
-        favouriteCountries!!.forEach {
-            if(it.name.toLowerCase(Locale.getDefault()).contains(query!!)) {
+        favouriteCountries?.forEach {
+            if(it.name.toLowerCase(Locale.getDefault()).contains(query)) {
                 countriesList.add(it)
             }
         }
@@ -72,7 +72,7 @@ class CountryViewModel @ViewModelInject constructor(
         return when {
             response.isSuccessful -> {
                 val summary = response.body()
-                NetworkResult.Success(summary!!)
+                NetworkResult.Success(summary)
             }
             else -> {
                 NetworkResult.Error(response.message())
