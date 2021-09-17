@@ -11,7 +11,7 @@ import com.example.vCovid.util.Constants.Companion.BASE_URL_FLAG
 import com.example.vCovid.util.Constants.Companion.FLAG_STYLE
 import com.example.vCovid.util.CountryDiffUtil
 
-// Adapter to show countries list on country fragment
+// Adapter to show countries list on country fragment on main activity.
 class CountriesAdapter : RecyclerView.Adapter<CountriesAdapter.MyViewHolder>() {
     private var countries = emptyList<Country>()
     class MyViewHolder(private val binding: CountryRowLayoutBinding) :
