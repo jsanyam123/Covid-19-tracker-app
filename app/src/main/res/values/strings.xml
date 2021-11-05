@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">vCovid</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="country_fragment">Global</string>
+    <string name="favorite_country_fragment">Favorites</string>
+    <string name="save_to_favorites">Save to Favorites</string>
+    <string name="no_favorite_countries">No Favorite Countries.</string>
+    <string name="country">India</string>
+    <string name="date">Date</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="discharged">Discharged</string>
+    <string name="active">Active</string>
+    <string name="deaths">Deaths</string>
+    <string name="sort">Sort:</string>
+
+
+
+</resources>
